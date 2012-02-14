@@ -2,12 +2,15 @@ package com.christophercotton.android.deviceinfo;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Point;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.widget.TextView;
 
 public class DeviceInfoActivity extends Activity
@@ -42,6 +45,10 @@ public class DeviceInfoActivity extends Activity
         tx.setText(serialString);
         Log.i(TAG, "Hardware Serial " + serialString);
 
-        
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+        tx = (TextView) findViewById(R.id.screen_size);
+        tx.setText(metrics.widthPixels + " x " + metrics.heightPixels);
     }
 }
